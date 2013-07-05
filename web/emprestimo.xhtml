@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Empréstimo</title>
+    </h:head>
+    <h:body>
+        <h1>Bem vindo à biblioteca!</h1>
+        <br />
+        <p:menubar>
+            <p:menuitem value="Página inicial" url="index.xhtml"/>
+            <p:menuitem value="Cadastro usuário" url="cadastroUsuario.xhtml"/>
+            <p:menuitem value="Cadastro livro" url="cadastroLivro.xhtml"/>
+            <p:menuitem value="Empréstimo" url="emprestimo.xhtml"/>
+            <p:menuitem value="Relatório" url="relatorio.xhtml"/>
+        </p:menubar>
+        
+        <div style="width: 400px;height: 450px; text-align: left; ">
+        <p:panel header="Empréstimo">
+            <h:form>
+                <p:growl id="growl"/>
+                <p:panelGrid columns="2" style="5px">
+                    
+                    <h:outputText value="Selecione o usuario"/>
+                    <p:selectOneMenu value="#{emprestimoMB.usuario.nome}">
+                        <f:selectItems value="#{usuarioMB.mostraUsuarios()}" var="usuarios" itemLabel="#{usuarios.nome}" itemValue="#{usuarios.id}"/>
+                    </p:selectOneMenu>
+                    
+                   
+                    
+                    <h:outputText value="Selecione o livro"/>
+                    <p:selectManyMenu value="#{emprestimoMB.livros}">  
+                        <f:selectItems value="#{livroMB.mostraLivro()}" var="livros" itemLabel="#{livros.titulo}" itemValue="#{livros.id}"/>   
+
+                        <p:column>  
+                            #{livros.titulo}  
+                        </p:column>  
+                    </p:selectManyMenu>
+                    
+                    <p:commandButton value="Salvar" actionListener="#{emprestimoMB.salvarEmprestimo()}" update="growl"/>
+                </p:panelGrid>  
+            </h:form>            
+        </p:panel>  
+            </div>
+    </h:body>
+</html>
+

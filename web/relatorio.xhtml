@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Empréstimo</title>
+    </h:head>
+    <h:body>
+        <h1>Bem vindo à biblioteca!</h1>
+        <br />
+        <p:menubar>
+            <p:menuitem value="Página inicial" url="index.xhtml"/>
+            <p:menuitem value="Cadastro usuário" url="cadastroUsuario.xhtml"/>
+            <p:menuitem value="Cadastro livro" url="cadastroLivro.xhtml"/>
+            <p:menuitem value="Empréstimo" url="emprestimo.xhtml"/>
+            <p:menuitem value="Relatório" url="relatorio.xhtml"/>
+        </p:menubar>
+        
+        <div style="width: 400px;height: 450px; text-align: left;">
+            <p:panel header="Relatorio Usuario">
+            <h:form>
+                <p:growl id="growl"/>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <p:dataTable id="tabela" value="#{usuarioMB.mostraUsuarios()}" var="usuario">
+                    <p:column  headerText="ID" >  
+                        <h:outputLabel value="#{usuario.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome" >
+                        <h:outputLabel value="#{usuario.nome}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+                </h:panelGrid>  
+            </h:form>            
+        </p:panel>
+            
+            <p:panel header="Relatorio Livro">
+            <h:form>
+                <p:growl id="growl"/>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <p:dataTable id="tabela" value="#{livroMB.mostraLivro()}" var="livro">
+                    <p:column  headerText="ID" >  
+                        <h:outputLabel value="#{livro.id}"/>
+                    </p:column>
+                    <p:column headerText="Titulo" >
+                        <h:outputLabel value="#{livro.titulo}"/>
+                    </p:column>
+
+                </p:dataTable>
+                </h:panelGrid>  
+            </h:form>            
+        </p:panel>
+            
+            <p:panel header="Relatorio Emprestimo/Devolucao">
+            <h:form>
+                <p:growl id="growl"/>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <p:dataTable id="tabela" value="#{emprestimoMB.mostraEmprestimos()}" var="emprestimo">
+                    <p:column  headerText="ID" >  
+                        <h:outputLabel value="#{emprestimo.id}"/>
+                    </p:column>
+                    <p:column headerText="Usuario" >
+                        <h:outputLabel value="#{emprestimo.usuario.id}"/>
+                    </p:column>
+                    <p:column headerText="Livro" >
+                        <h:outputLabel value="#{emprestimo.livro.id}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Devolução" action="#{emprestimoMB.apagaEmprestimo()}" ajax="false"/>
+                    </p:column>
+
+                </p:dataTable>
+                </h:panelGrid>  
+            </h:form>            
+        </p:panel>
+            </div>
+    </h:body>
+</html>
+
